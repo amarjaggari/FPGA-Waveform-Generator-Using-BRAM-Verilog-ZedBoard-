@@ -8,7 +8,7 @@ The BRAM-based waveform generator uses Block RAM inside the FPGA to store digita
 
 This method avoids runtime computation like sin(), cos(), or CORDIC operations. Instead, the waveform is pre-computed and stored in memory, enabling faster and more resource-efficient generation.
 
-#2. Why BRAM? (Advantage Over LUTs)
+**#2. Why BRAM? (Advantage Over LUTs)**
 
 FPGA has two main memory resources:
 
@@ -20,10 +20,10 @@ b) BRAM (Block RAM)
 
 Dedicated memory blocks inside the FPGA fabric with large size and better performance.
 
-Why BRAM is preferred for waveform LUTs
+| Feature          | LUT RAM           | BRAM                    |
+| ---------------- | ----------------- | ----------------------- |
+| Storage capacity | Small             | Large (KB–MB)           |
+| Speed            | High              | Very high               |
+| Best use         | Logic functions   | Data tables / waveforms |
+| Resources        | Uses logic fabric | Dedicated memory cells  |
 
-Feature	LUT RAM	BRAM
-Storage capacity	Small	Large (KB–MB)
-Speed	High	Very high
-Best use	Logic functions	Data tables / waveforms
-Resources	Uses logic fabric	Dedicated memory cells
