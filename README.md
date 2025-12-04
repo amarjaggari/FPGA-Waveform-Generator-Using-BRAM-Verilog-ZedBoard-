@@ -41,6 +41,7 @@ memory_initialization_vector =
   1234,
   ABCD,
   FFFF;
+  
 #Why Generate COE Files from Python?
 
 
