@@ -442,12 +442,6 @@ FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/
 ├── README.md                          # This file
 ├── LICENSE                            # Project license
 │
-├── python_scripts/
-│   ├── coe_generator.py               # Single waveform COE generator
-│   ├── multi_waveform_gen.py          # Multi-waveform generator
-│   ├── advanced_coe_gen.py            # Advanced with parameters
-│   └── dds_modulation.py              # DDS frequency control data
-│
 ├── verilog_src/
 │   ├── waveform_generator.v           # Main waveform generator module
 │   ├── bram_controller.v              # BRAM access controller
@@ -456,7 +450,7 @@ FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/
 │   └── top_module.v                   # Top-level design
 │
 ├── coe_files/
-│   ├── sine_256.coe                   # Sine wave lookup table
+│   ├── sin.coe                   # Sine wave lookup table
 │   ├── square_256.coe                 # Square wave lookup table
 │   ├── triangle_256.coe               # Triangular wave lookup table
 │   └── sawtooth_256.coe               # Sawtooth wave lookup table
