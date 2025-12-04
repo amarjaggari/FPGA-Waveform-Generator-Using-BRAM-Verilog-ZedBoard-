@@ -434,6 +434,16 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
 
 ---
 
+### Signal Flow
+
+```
+┌─────────────┐    ┌──────────┐    ┌──────┐    ┌─────┐
+│   Counter   │───→│   BRAM   │───→│  DAC │───→│ Sig │
+│             │    │ Lookup   │    │      │    │     │
+└─────────────┘    └──────────┘    └──────┘    └─────┘
+    Increments     Sample Values   8→Analog   Output
+   Address         per Address
+``
 ## Project Structure
 
 ```
@@ -616,12 +626,6 @@ set_output_delay -clock clk 2.0 [get_ports wave_out*]
 
 ---
 
-## License
-
-This project is licensed under the MIT License - see LICENSE file for details.
-
----
-
 ## Authors
 
 - **Your Name** - NRSC ISRO Intern, Electronics & Communication Engineering
@@ -633,15 +637,15 @@ This project is licensed under the MIT License - see LICENSE file for details.
 Contributions are welcome! Please submit issues and pull requests to improve the project.
 
 ---
-
 ## Acknowledgments
 
-- NRSC (National Remote Sensing Centre), ISRO
-- Xilinx/AMD for FPGA tools and documentation
-- Digilent for ZedBoard resources
+- **NRSC (National Remote Sensing Centre)**, ISRO for internship opportunity
+- **Xilinx/AMD** for Vivado tools and Block Memory Generator IP
+- **Digilent** for ZedBoard documentation and resources
+- **Open-source FPGA community** for inspiration and best practices
 
 ---
 
-**Last Updated**: December 2025
+**Last Updated**: 04-December 2025
 
 **Status**: Active Development 🚀
