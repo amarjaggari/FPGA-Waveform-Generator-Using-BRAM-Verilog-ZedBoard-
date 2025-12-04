@@ -35,12 +35,12 @@ A COE (Coefficient) file is a text file format used by Xilinx/AMD FPGA tools to 
 
 **Basic COE File Format**
 
-''memory_initialization_radix = 16;   # Or 2, 10, 16 for binary, decimal, hex
+'memory_initialization_radix = 16;   # Or 2, 10, 16 for binary, decimal, hex
 memory_initialization_vector = 
   0000,
   1234,
   ABCD,
-  FFFF; ''
+  FFFF; '
   
 #Why Generate COE Files from Python?
 
