@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/23922665/README.md)
+[README (1).md](https://github.com/user-attachments/files/23923445/README.1.md)
 # FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard
 
 A BRAM-based digital function generator implemented in Verilog on the ZedBoard. Generates sine, square, triangular, and sawtooth waveforms using BRAM lookup tables with programmable frequency and amplitude control.
@@ -68,6 +68,7 @@ FPGA has two main memory resources:
 - Sufficient for storing multiple waveforms with high resolution
 
 ---
+
 **Should you store all waveforms in a single large BRAM, or use separate BRAMs for each waveform?**
 
 Each approach has distinct advantages and trade-offs. Your choice depends on:
@@ -187,6 +188,7 @@ Addresses 0200–02FF:    Triangle wave (256 samples)
 Addresses 0300–03FF:    Sawtooth wave (256 samples)
 ```
 
+---
 
 ## Getting COE Files from Python for BRAM Initialization
 
@@ -306,6 +308,8 @@ def generate_coe(waveform_type, N=256, bits=8, filename=None):
 for wave in ['sine', 'square', 'triangle', 'sawtooth']:
     generate_coe(wave, N=256, bits=12)
 ```
+
+---
 
 ## How Vivado Uses COE to Store Data in BRAM
 
@@ -433,7 +437,7 @@ where:
 To reduce frequency, use fractional increment (DDS technique) or slower address counter.
 
 ---
-'''
+
 ### Signal Flow
 
 ```
@@ -443,9 +447,54 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
 └─────────────┘    └──────────┘    └──────┘    └─────┘
     Increments     Sample Values   8→Analog   Output
    Address         per Address
-``
+```
+
+---
+
+## Project Structure
+
+```
+FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/
+│
+├── README.md                          # This file
+├── verilog_src/
+│   ├── waveform_generator.v           # Main waveform generator module
+│   ├── bram_controller.v              # BRAM access controller
+│   ├── frequency_counter.v            # Configurable frequency counter
+│   ├── dac_interface.v                # DAC output interface
+│   └── top_module.v                   # Top-level design
+│
+├── coe_files/
+│   ├── sine_256.coe                   # Sine wave lookup table
+│   ├── square_256.coe                 # Square wave lookup table
+│   ├── triangle_256.coe               # Triangular wave lookup table
+│   └── sawtooth_256.coe               # Sawtooth wave lookup table
+│
+├── vivado_project/
+│   ├── waveform_gen.xpr               # Vivado project file
+│   ├── constraints/
+│   │   └── zedboard.xdc               # Pin assignments for ZedBoard
+│   └── ip_cores/                      # Generated IP cores
+│
+├── constraints/
+│   ├── zedboard.xdc                   # ZedBoard pin mapping
+│   └── timing.xdc                     # Timing constraints
+│
+├── simulation/
+│   ├── tb_waveform_gen.v              # Testbench
+│   ├── waveforms.vcd                  # Waveform dump
+│   └── sim_results.txt                # Simulation results
+│
+└── docs/
+    ├── IMPLEMENTATION_GUIDE.md        # Detailed implementation steps
+    ├── TROUBLESHOOTING.md             # Common issues and solutions
+    └── WAVEFORM_MATH.md               # Mathematical background
+```
+
+---
 
 ## Getting Started
+
 ### Hardware Requirements
 
 - **ZedBoard** (Zynq-7020 FPGA)
@@ -454,7 +503,7 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
   - Connected to FPGA GPIO or PMOD header
 - **USB JTAG Cable** (for programming)
 - **USB Power Supply** (5V for ZedBoard)
-### Step 1: Generate COE Files with Python
+
 ### Software Requirements
 
 - **Xilinx Vivado** (2020.1 or later)
@@ -464,8 +513,23 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
 - **Python 3.6+**
   - Required for COE file generation
   - Check version: `python --version`
+
+### Step 1: Generate COE Files with Python
+
 ### Step 2: Create Vivado Project
+
 ### Step 3: Add Verilog Source Files
+
+---
+
+## Implementation Guide
+
+### Verilog Implementation
+
+### Constraints File
+
+---
+
 ## IP Block Generation (Block Memory Generator)
 
 Now we create the **BRAM IP blocks** that will hold your waveform lookup tables.
@@ -478,7 +542,10 @@ We will create:
 2. **BRAM for Square** → initialized with `square_512.coe`
 3. **BRAM for Triangle** → initialized with `triangle_512.coe`
 4. **BRAM for Sawtooth** → initialized with `sawtooth_512.coe`
-   **Basic Tab:**
+
+### Configuration
+
+**Basic Tab:**
 - **Memory Type**: `Single Port ROM`
   - This makes BRAM read-only (good for fixed waveforms)
 - **Algorithm**: `Fixed` (default)
@@ -487,12 +554,15 @@ We will create:
 **Port A Configuration:**
 - **Read Width A**: `8` bits
 - **Read Depth A**: `256`
+
 **Other Options Tab (or Initialization Tab):**
 - Enable ✓ **Load Init File**
 - Click **Browse** button
 - Navigate to: `coe_files/sine_512.coe`
 - Select and click **OK**
-- 
+
+---
+
 ## Troubleshooting
 
 ### Issue 1: COE File Not Loading in Vivado
@@ -595,6 +665,7 @@ set_output_delay -clock clk 2.0 [get_ports wave_out*]
 Contributions are welcome! Please submit issues and pull requests to improve the project.
 
 ---
+
 ## Acknowledgments
 
 - **NRSC (National Remote Sensing Centre)**, ISRO for internship opportunity
