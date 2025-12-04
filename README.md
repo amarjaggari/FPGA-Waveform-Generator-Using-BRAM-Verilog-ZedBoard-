@@ -686,7 +686,7 @@ set_output_delay -clock clk 2.0 [get_ports wave_out*]
 
 ## Authors
 
-- **Your Name** - NRSC ISRO Intern, Electronics & Communication Engineering
+- **Your Name** - Amarendar Reddy | NRSC ISRO Intern, Electronics & Communication Engineering
 
 ---
 
@@ -708,3 +708,4 @@ Contributions are welcome! Please submit issues and pull requests to improve the
 **Last Updated**: 04-December 2025
 
 **Status**: Active Development 🚀
+**Contact**:amarendarreddy84@gmail.com
