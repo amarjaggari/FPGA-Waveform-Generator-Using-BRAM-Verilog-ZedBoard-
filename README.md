@@ -71,3 +71,56 @@ for i in range(N):
         file.write(",")   # comma between values
 file.write(";")
 file.close()
+
+4. How Vivado Uses .coe to Store Data in BRAM
+Steps in Vivado:
+
+Open IP Catalog → Block Memory Generator
+
+Set memory depth = 256, width = 8 bits
+
+Browse → load sine256.coe
+
+Generate output product
+
+Connect BRAM output dout to your wave player logic
+
+Now the BRAM contains:
+
+Address	Stored Value (from .coe)
+0x00	00
+0x01	04
+0x02	0A
+0x03	...
+...	...
+0xFF	Last sample
+ 5. How Data Is Accessed Inside BRAM
+
+BRAM acts like a digital memory table.
+
+Address lines → select which sample to output
+addr = 0 → output sample 0
+addr = 1 → output sample 1
+addr = 2 → output sample 2
+...
+addr = 255 → output sample 255 → wrap to 0
+
+
+Inside FPGA:
+
+Counter/DDS → Address → BRAM → Sample Out → DAC/PWM
+
+ASCII Internal View
++----------+--------+
+| Address  | Value  |
++----------+--------+
+|   00     | 0x00   |
+|   01     | 0x04   |
+|   02     | 0x0A   |
+|   03     | 0x10   |
+|   ...    | ...    |
+|   FF     | 0x7E   |
++----------+--------+
+
+
+Each clock cycle updates the address, so values stream out sequentially, generating waveform.
