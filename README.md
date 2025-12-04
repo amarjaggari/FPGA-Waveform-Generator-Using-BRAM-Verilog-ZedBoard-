@@ -68,6 +68,125 @@ FPGA has two main memory resources:
 - Sufficient for storing multiple waveforms with high resolution
 
 ---
+**Should you store all waveforms in a single large BRAM, or use separate BRAMs for each waveform?**
+
+Each approach has distinct advantages and trade-offs. Your choice depends on:
+- Sample resolution required (1024, 4096+ samples)
+- Number of waveforms needed (2, 4, 8+)
+- BRAM availability on your FPGA
+- Frequency control flexibility
+- Power consumption and latency concerns
+
+---
+
+## Why Use Multiple BRAMs?
+
+### Reason 1: **Independent Waveform Storage**
+
+With **4 separate BRAMs**, each waveform type gets its own dedicated memory:
+
+```
+BRAM_0 → Sine wave (256/512/1024 samples)
+BRAM_1 → Square wave (256/512/1024 samples)
+BRAM_2 → Triangle wave (256/512/1024 samples)
+BRAM_3 → Sawtooth wave (256/512/1024 samples)
+```
+
+**Advantages:**
+- Simple multiplexing logic: Just select which BRAM to read from
+- Each BRAM can have different sample counts if needed
+- Independent frequency control per waveform
+- No memory contention between waveforms
+
+---
+
+### Reason 2: **Higher Sample Count = Better Signal Purity**
+
+With an **8-bit DAC** (0–255 output levels), the quality of your generated waveform depends on **sampling resolution**:
+
+#### 8-bit DAC Output Quality
+
+An 8-bit DAC has 256 discrete levels (0 to 255). The quality of your waveform depends on how many samples you use per cycle:
+
+| Samples/Cycle | Quality          | THD Estimate | Use Case           |
+| ------------- | ---------------- | ------------ | ------------------ |
+| 64            | Poor             | ~12%         | Testing only       |
+| 128           | Fair             | ~6%          | Basic generation   |
+| 256           | Good             | ~2%          | Standard use       |
+| 512           | Very Good        | ~0.5%        | Audio-grade        |
+| 1024          | Excellent        | ~0.1%        | Precision signals  |
+| 4096          | Ultra-precision  | <0.01%       | Lab equipment      |
+
+**THD = Total Harmonic Distortion** (lower is better)
+
+#### Why More Samples Improve Purity
+
+A sine wave with only 64 samples looks like a **staircase**:
+```
+                    *
+                  *   *
+                *       *
+              *           *
+            *               *
+```
+
+A sine wave with 1024 samples looks **smooth**:
+```
+                    ***
+                  *       *
+                *           *
+              *               *
+            *                   *
+```
+
+**Nyquist Theorem**: To accurately represent a signal, you need at least 2 samples per cycle of the highest frequency component. Using MORE samples captures harmonic content better and reduces quantization errors.
+
+---
+
+### Reason 3: **Parallel Dual-Port Access**
+
+With multiple BRAMs, you can implement **dual-port** or **triple-port** access:
+
+```verilog
+// Read two different samples simultaneously from different BRAMs
+assign sine_out = sine_bram[addr_sine];
+assign square_out = square_bram[addr_square];
+```
+
+**Single BRAM limitation:**
+- Can only read one address per cycle
+- Requires multiplexing if you need multiple waveforms
+
+---
+
+### Reason 4: **Frequency Tuning Flexibility**
+
+With separate BRAMs and address counters:
+
+```
+BRAM_Sine + Counter_1    → Frequency F1
+BRAM_Square + Counter_2  → Frequency F2
+BRAM_Triangle + Counter_3→ Frequency F3
+BRAM_Sawtooth + Counter_4→ Frequency F4
+```
+
+Each waveform can have **independent frequency control** without affecting others.
+
+---
+
+## Single BRAM with Partitioning
+
+### Concept
+
+Store all 4 waveforms in **one large BRAM** by partitioning the address space:
+
+```
+Addresses 0000–00FF:    Sine wave (256 samples)
+Addresses 0100–01FF:    Square wave (256 samples)
+Addresses 0200–02FF:    Triangle wave (256 samples)
+Addresses 0300–03FF:    Sawtooth wave (256 samples)
+```
+
 
 ## Getting COE Files from Python for BRAM Initialization
 
