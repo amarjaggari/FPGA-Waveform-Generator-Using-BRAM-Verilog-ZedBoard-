@@ -622,10 +622,65 @@ set_output_delay -clock clk 2.0 [get_ports wave_out*]
 
 ## References
 
-- [Xilinx Block Memory Generator UG794](https://docs.xilinx.com/)
-- [ZedBoard Reference Manual](https://reference.digilentinc.com/reference/boards/zedboard/start)
-- [Verilog HDL Language Reference](https://ieeexplore.ieee.org/document/5543559)
-- [Digital Signal Processing on FPGAs](https://www.amazon.com/Digital-Signal-Processing-FPGAs-Underwood/dp/0137051549)
+### Core Concepts: BRAM & Block Memory Generator
+
+- **Xilinx / AMD Block Memory Generator (IP Core Overview / Datasheet)**  
+  https://www.ni.com/docs/en-US/bundle/labview-nxg-fpga-module-cdl-api-ref/page/block-memory-generator.html
+
+- **Block Memory Generator v1.1 Product Specification (PDF)**  
+  http://web.mit.edu/neboat/Public/6.111_final_project/code/blk_mem_gen_ds512.pdf
+
+---
+
+### ZedBoard Documentation
+
+- **ZedBoard Zynq-7000 Development Board Reference Manual (Digilent)**  
+  https://digilent.com/reference/programmable-logic/zedboard/reference-manual
+
+---
+
+### COE File & Python Generation
+
+- **Python Script for Generating Xilinx .coe Files (General-Purpose COE Generator)**  
+  https://github.com/kooltzh/xilinx-coe-generator
+
+- **bin2coe Tool (Convert Binary to COE)**  
+  https://pypi.org/project/bin2coe/
+
+- **Image-to-COE Example (Map Arbitrary Data into BRAM)**  
+  https://github.com/Jesse-Millwood/image-2-coe
+
+- **Discussion: Memory Initialization with .coe in Xilinx FPGAs**  
+  https://www.edaboard.com/threads/memory-initialization-file-for-xilinx-fpga-boards-using-coe-file.360941/
+
+---
+
+### FPGA Waveform Generator Examples & Papers
+
+- **FPGA-Based Function Generator (IRJET Paper)**  
+  https://www.irjet.net/archives/V2/i9/IRJET-V2I9289.pdf
+
+- **Waveform Generator Implemented in FPGA (Master's Thesis – I/Q Generation with RAM LUTs)**  
+  http://www.diva-portal.org/smash/get/diva2:19354/FULLTEXT01.pdf
+
+- **Arbitrary Waveform Generator Based on FPGA (Project Report)**  
+  http://www.ir.juit.ac.in:8080/jspui/bitstream/123456789/4082/1/Arbitrary%20Waveform%20Generator%20Based%20on%20FPGA.pdf
+
+- **Fast FPGA-Based Low-Jitter Waveform Generator (PAC2013 Paper)**  
+  https://jacow.org/PAC2013/papers/THPMA01.pdf
+
+---
+
+### Forum & Tutorial Style References
+
+- **Digilent Forum: Designing a Waveform Array Generator on FPGA**  
+  https://forum.digilent.com/topic/20345-designing-a-waveform-array-generator/
+
+- **DEEDS Tutorial: Digital Waveform Generator on FPGA**  
+  https://www.digitalelectronicsdeeds.com/learningmaterials/LM/T120/120080_Digital_WaveForm_Gen_FPGA/Index.htm
+
+- **Reddit Thread: Using Xilinx Block Memory Generator**  
+  https://www.reddit.com/r/FPGA/comments/hm33q4/how_to_use_xilinx_block_memory_generator_to/
 
 ---
 
