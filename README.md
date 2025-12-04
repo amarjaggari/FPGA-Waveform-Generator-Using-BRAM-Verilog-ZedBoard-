@@ -483,65 +483,54 @@ FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/
 ```
 
 ---
-
 ## Getting Started
+### Hardware Requirements
 
-### Prerequisites
+- **ZedBoard** (Zynq-7020 FPGA)
+- **8-bit DAC** (external or onboard)
+  - Suggested options: AD5611, MCP4912, MAX5102
+  - Connected to FPGA GPIO or PMOD header
+- **USB JTAG Cable** (for programming)
+- **USB Power Supply** (5V for ZedBoard)
+### Step 1: Generate COE Files with Python
+### Software Requirements
 
-- **Hardware**: ZedBoard with Zynq-7020 FPGA
-- **Software**:
-  - Xilinx Vivado 2023.1 or later
-  - Python 3.8+
-  - GTKWave (for waveform visualization)
+- **Xilinx Vivado** (2020.1 or later)
+  - Free WebPACK license is sufficient
+  - Download: [Xilinx Vivado Download](https://www.xilinx.com/support/download.html)
+  
+- **Python 3.6+**
+  - Required for COE file generation
+  - Check version: `python --version`
+### Step 2: Create Vivado Project
+### Step 3: Add Verilog Source Files
+## IP Block Generation (Block Memory Generator)
 
-### Quick Start
+Now we create the **BRAM IP blocks** that will hold your waveform lookup tables.
 
-#### 1. Generate COE Files
+### Creating Four BRAM IP Cores
 
-```bash
-cd python_scripts
-python coe_generator.py
-```
+We will create:
 
-This generates `.coe` files in the `coe_files/` directory.
+1. **BRAM for Sine** → initialized with `sine_512.coe`
+2. **BRAM for Square** → initialized with `square_512.coe`
+3. **BRAM for Triangle** → initialized with `triangle_512.coe`
+4. **BRAM for Sawtooth** → initialized with `sawtooth_512.coe`
+   **Basic Tab:**
+- **Memory Type**: `Single Port ROM`
+  - This makes BRAM read-only (good for fixed waveforms)
+- **Algorithm**: `Fixed` (default)
+- **Primitive**: Leave default
 
-#### 2. Create Vivado Project
-
-```bash
-cd vivado_project
-vivado -source create_project.tcl
-```
-
-#### 3. Add BRAM IP Cores
-
-- Open generated Vivado project
-- Create Block Memory Generator IPs for each waveform
-- Load corresponding `.coe` files
-- Generate output products
-
-#### 4. Implement Design
-
-```bash
-# Run synthesis, place & route
-vivado -source implement.tcl
-```
-
-#### 5. Generate Bitstream
-
-```bash
-vivado -source generate_bitstream.tcl
-```
-
-#### 6. Program ZedBoard
-
-- Connect ZedBoard to computer via JTAG
-- Open Hardware Manager in Vivado
-- Program device with generated `.bit` file
-
----
-
-
-
+**Port A Configuration:**
+- **Read Width A**: `8` bits
+- **Read Depth A**: `256`
+**Other Options Tab (or Initialization Tab):**
+- Enable ✓ **Load Init File**
+- Click **Browse** button
+- Navigate to: `coe_files/sine_512.coe`
+- Select and click **OK**
+- 
 ## Troubleshooting
 
 ### Issue 1: COE File Not Loading in Vivado
