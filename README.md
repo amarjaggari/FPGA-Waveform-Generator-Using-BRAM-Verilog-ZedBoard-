@@ -45,10 +45,10 @@ memory_initialization_vector =
 #Why Generate COE Files from Python?
 
 
-Dynamic data generation (sine waves, filters, LUTs)
+i.Dynamic data generation (sine waves, filters, LUTs)
 
-Preprocessing complex data (images, audio samples)
+ii.Preprocessing complex data (images, audio samples)
 
-Algorithmic pattern generation
+iii.Algorithmic pattern generation
 
-Test vector creation
+iv.Test vector creation
