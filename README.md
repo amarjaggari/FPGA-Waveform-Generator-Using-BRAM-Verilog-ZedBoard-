@@ -1,4 +1,3 @@
-[README (1).md](https://github.com/user-attachments/files/23923445/README.1.md)
 # FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard
 
 A BRAM-based digital function generator implemented in Verilog on the ZedBoard. Generates sine, square, triangular, and sawtooth waveforms using BRAM lookup tables with programmable frequency and amplitude control.
