@@ -7,7 +7,8 @@ Waveform generation is a foundational technique used in electronics for producin
 The BRAM-based waveform generator uses Block RAM inside the FPGA to store digital sample values of a waveform. These samples form a lookup table (LUT) representing one full cycle of the signal. By reading these values sequentially at a controlled clock rate, the FPGA produces repeated periodic waveform output.
 
 This method avoids runtime computation like sin(), cos(), or CORDIC operations. Instead, the waveform is pre-computed and stored in memory, enabling faster and more resource-efficient generation.
-2. Why BRAM? (Advantage Over LUTs)
+
+#2. Why BRAM? (Advantage Over LUTs)
 
 FPGA has two main memory resources:
 
