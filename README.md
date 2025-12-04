@@ -502,7 +502,7 @@ FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/ (Public)
 
 ### Verilog Implementation
 
-### Constraints File
+### Constraints File (https://github.com/amarjaggari/FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard-/blob/main/Constraints/bramfg.xdc)
 
 ---
 
