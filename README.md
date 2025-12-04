@@ -50,3 +50,24 @@ ii.Preprocessing complex data (images, audio samples)
 iii.Algorithmic pattern generation
 
 iv.Test vector creation
+** **Generating COE Using Python****
+
+We mathematically generate a waveform (example: 8-bit sine wave of 256 samples)
+
+Python Code Example:
+import math
+
+N = 256                       # number of samples
+bits = 8                      # amplitude resolution (0–255)
+file = open("sine256.coe","w")
+
+file.write("memory_initialization_radix=16;\n")
+file.write("memory_initialization_vector=\n")
+
+for i in range(N):
+    value = int((math.sin(2*math.pi*i/N)+1)*127.5)   # convert -1..1 → 0..255
+    file.write(f"{value:02X}")
+    if i < N-1:
+        file.write(",")   # comma between values
+file.write(";")
+file.close()
