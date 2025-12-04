@@ -30,9 +30,11 @@ Dedicated memory blocks inside the FPGA fabric with large size and better perfor
 **#Getting COE Files from Python for BRAM Initialization**
 
 What is a COE File?
+
 A COE (Coefficient) file is a text file format used by Xilinx/AMD FPGA tools to initialize Block RAM (BRAM) or ROM contents. It specifies the initial memory values that get loaded into BRAM when the FPGA configuration is loaded.
 
 **Basic COE File Format**
+
 memory_initialization_radix = 16;   # Or 2, 10, 16 for binary, decimal, hex
 memory_initialization_vector = 
   0000,
@@ -40,6 +42,7 @@ memory_initialization_vector =
   ABCD,
   FFFF;
 #Why Generate COE Files from Python?
+
 
 Dynamic data generation (sine waves, filters, LUTs)
 
