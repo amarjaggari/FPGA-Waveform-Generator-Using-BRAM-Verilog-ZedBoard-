@@ -444,48 +444,47 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
     Increments     Sample Values   8→Analog   Output
    Address         per Address
 ``
+
 ## Project Structure
 
 ```
 FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/
 │
-├── README.md                          # This file
-├── LICENSE                            # Project license
+├── README.md                               # Main documentation
+├── Getting-Started-IP-Block-Generation.md  # Detailed setup guide
+├── Multiple-BRAMs.md                       # BRAM architecture guide
+├── LICENSE                                 # MIT License
+│
+├── python_scripts/
+│   ├── generate_coe.py                    # COE file generator
+│   ├── multi_waveform_gen.py              # Advanced generator
+│   └── advanced_coe_gen.py                # Parametric generator
 │
 ├── verilog_src/
-│   ├── waveform_generator.v           # Main waveform generator module
-│   ├── bram_controller.v              # BRAM access controller
-│   ├── frequency_counter.v            # Configurable frequency counter
-│   ├── dac_interface.v                # DAC output interface
-│   └── top_module.v                   # Top-level design
+│   ├── top_waveform_gen.v                 # Top-level module
+│   ├── freq_counter.v                     # Frequency controller
+│   └── waveform_generator.v               # Waveform logic
 │
 ├── coe_files/
-│   ├── sin.coe                   # Sine wave lookup table
-│   ├── square_256.coe                 # Square wave lookup table
-│   ├── triangle_256.coe               # Triangular wave lookup table
-│   └── sawtooth_256.coe               # Sawtooth wave lookup table
-│
-├── vivado_project/
-│   ├── waveform_gen.xpr               # Vivado project file
-│   ├── constraints/
-│   │   └── zedboard.xdc               # Pin assignments for ZedBoard
-│   └── ip_cores/                      # Generated IP cores
+│   ├── sine_512.coe                       # Sine waveform LUT
+│   ├── square_512.coe                     # Square waveform LUT
+│   ├── triangle_512.coe                   # Triangle waveform LUT
+│   └── sawtooth_512.coe                   # Sawtooth waveform LUT
 │
 ├── constraints/
-│   ├── zedboard.xdc                   # ZedBoard pin mapping
-│   └── timing.xdc                     # Timing constraints
+│   ├── zedboard.xdc                       # Pin assignments
+│   └── timing.xdc                         # Timing constraints
 │
 ├── simulation/
-│   ├── tb_waveform_gen.v              # Testbench
-│   ├── waveforms.vcd                  # Waveform dump
-│   └── sim_results.txt                # Simulation results
+│   ├── tb_waveform_gen.v                  # Testbench
+│   └── sim_results.txt                    # Simulation results
 │
-└── docs/
-    ├── IMPLEMENTATION_GUIDE.md        # Detailed implementation steps
-    ├── TROUBLESHOOTING.md             # Common issues and solutions
-    └── WAVEFORM_MATH.md               # Mathematical background
+└── vivado_project/
+    ├── waveform_gen.xpr                   # Vivado project
+    └── ip_cores/                          # Generated IPs
 ```
 
+---
 ---
 ## Getting Started
 ### Hardware Requirements
