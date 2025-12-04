@@ -501,8 +501,7 @@ FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/ (Public)
 ## Implementation Guide
 
 ### Verilog Implementation
-
-- [ ### Constraints File]([https://www.amazon.com/Digital-Signal-Processing-FPGAs-Underwood/dp/0137051549](https://github.com/amarjaggari/FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard-/blob/main/Constraints/bramfg.xdc ))
+### Constraints File
 
 ---
 
