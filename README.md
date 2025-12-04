@@ -188,60 +188,6 @@ for wave in ['sine', 'square', 'triangle', 'sawtooth']:
     generate_coe(wave, N=256, bits=12)
 ```
 
-#### 3. **Advanced COE Generator with Offset and Scaling**
-
-```python
-import math
-
-def generate_advanced_coe(waveform_type, N=256, bits=12, 
-                         amplitude=1.0, offset=0.0, phase=0.0, 
-                         filename=None):
-    """
-    Generate COE with amplitude, offset, and phase control
-    """
-    if filename is None:
-        filename = f"{waveform_type}_{N}_{bits}bit.coe"
-    
-    max_value = (2 ** bits) - 1
-    samples = []
-    
-    for i in range(N):
-        t = (i / N) * 2 * math.pi + phase
-        
-        if waveform_type == 'sine':
-            normalized = math.sin(t)
-        elif waveform_type == 'square':
-            normalized = 1.0 if math.sin(t) >= 0 else -1.0
-        elif waveform_type == 'triangle':
-            normalized = 2 * abs(2 * (t / (2 * math.pi) - 
-                             math.floor(t / (2 * math.pi) + 0.5))) - 1
-        
-        # Apply amplitude and offset
-        scaled = normalized * amplitude + offset
-        
-        # Clamp to valid range
-        scaled = max(0, min(max_value, int(scaled * (max_value / 2))))
-        samples.append(scaled)
-    
-    # Write COE file
-    with open(filename, "w") as f:
-        f.write("memory_initialization_radix=16;\n")
-        f.write("memory_initialization_vector=\n")
-        hex_width = (bits + 3) // 4
-        for i, sample in enumerate(samples):
-            f.write(f"{sample:0{hex_width}X}")
-            if i < len(samples) - 1:
-                f.write(",")
-        f.write(";")
-    
-    print(f"Generated {filename} ({bits}-bit, {N} samples)")
-
-# Example: 12-bit sine with 0.8 amplitude and 0.5 offset
-generate_advanced_coe('sine', N=512, bits=12, amplitude=0.8, offset=0.5)
-```
-
----
-
 ## How Vivado Uses COE to Store Data in BRAM
 
 ### Step-by-Step Vivado Workflow
