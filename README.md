@@ -453,41 +453,18 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
 ## Project Structure
 
 ```
-FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/
+FPGA-Waveform-Generator-Using-BRAM-Verilog-ZedBoard/ (Public)
 │
-├── README.md                          # This file
-├── verilog_src/
-│   ├── waveform_generator.v           # Main waveform generator module
-│   ├── bram_controller.v              # BRAM access controller
-│   ├── frequency_counter.v            # Configurable frequency counter
-│   ├── dac_interface.v                # DAC output interface
-│   └── top_module.v                   # Top-level design
+├── 📁 BRAM/                    # Block RAM files & COE lookup tables
+├── 📁 Constraints/             # XDC constraint files
+├── 📁 Simulation/              # Testbenches & simulation files
+├── 📁 Sources/                 # Verilog source code
+├── 📁 Vivado/                  # Vivado project files
 │
-├── coe_files/
-│   ├── sine_256.coe                   # Sine wave lookup table
-│   ├── square_256.coe                 # Square wave lookup table
-│   ├── triangle_256.coe               # Triangular wave lookup table
-│   └── sawtooth_256.coe               # Sawtooth wave lookup table
+├── README.md                   # Main documentation (recently updated)
 │
-├── vivado_project/
-│   ├── waveform_gen.xpr               # Vivado project file
-│   ├── constraints/
-│   │   └── zedboard.xdc               # Pin assignments for ZedBoard
-│   └── ip_cores/                      # Generated IP cores
-│
-├── constraints/
-│   ├── zedboard.xdc                   # ZedBoard pin mapping
-│   └── timing.xdc                     # Timing constraints
-│
-├── simulation/
-│   ├── tb_waveform_gen.v              # Testbench
-│   ├── waveforms.vcd                  # Waveform dump
-│   └── sim_results.txt                # Simulation results
-│
-└── docs/
-    ├── IMPLEMENTATION_GUIDE.md        # Detailed implementation steps
-    ├── TROUBLESHOOTING.md             # Common issues and solutions
-    └── WAVEFORM_MATH.md               # Mathematical background
+└── 42 Commits (main branch)
+
 ```
 
 ---
