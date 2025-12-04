@@ -433,7 +433,7 @@ where:
 To reduce frequency, use fractional increment (DDS technique) or slower address counter.
 
 ---
-
+'''
 ### Signal Flow
 
 ```
@@ -444,6 +444,7 @@ To reduce frequency, use fractional increment (DDS technique) or slower address 
     Increments     Sample Values   8→Analog   Output
    Address         per Address
 ``
+
 ## Getting Started
 ### Hardware Requirements
 
